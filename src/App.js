@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Navigation from './components/Navigation';
+import Footer from './components/Footer';
+import SectionDivider from './components/SectionDivider';
+import FloatingElements from './components/FloatingElements';
+import ScrollProgress from './components/ScrollProgress';
+import Hero from './sections/Hero';
+import About from './sections/About';
+import Skills from './sections/Skills';
+import Projects from './sections/Projects';
+import Contact from './sections/Contact';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App min-h-screen bg-black text-white relative">
+      <ScrollProgress />
+      <FloatingElements />
+      <Navigation />
+      <main>
+        <Hero />
+        <SectionDivider />
+        <About />
+        <SectionDivider />
+        <Skills />
+        <SectionDivider />
+        <Projects />
+        <SectionDivider />
+        <Contact />
+      </main>
+      <Footer />
     </div>
   );
 }
