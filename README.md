@@ -68,3 +68,14 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## EmailJS setup
+
+1) Copy `.env.example` to `.env` and fill:
+```
+REACT_APP_EMAILJS_SERVICE_ID=...
+REACT_APP_EMAILJS_TEMPLATE_ID=...
+REACT_APP_EMAILJS_PUBLIC_KEY=...
+```
+2) In EmailJS, ensure your template fields match: `name`, `email`, `message`.
+3) Restart `npm start` after setting env values.

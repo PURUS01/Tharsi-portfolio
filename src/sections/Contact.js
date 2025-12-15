@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import AnimatedBackground from '../components/AnimatedBackground';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const ref = useRef(null);
@@ -27,6 +28,27 @@ const Contact = () => {
     email: '',
     message: '',
   });
+  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState({ type: 'idle', message: '' });
+
+  const getEnvVars = () => {
+    const serviceId = (process.env.REACT_APP_EMAILJS_SERVICE_ID || '').trim();
+    const templateId = (process.env.REACT_APP_EMAILJS_TEMPLATE_ID || '').trim();
+    const publicKey = (process.env.REACT_APP_EMAILJS_PUBLIC_KEY || '').trim();
+
+    if (process.env.NODE_ENV === 'development') {
+      // Helpful debug in dev; remove or silence in prod builds.
+      // Only logs whether values are present, not their content.
+      // eslint-disable-next-line no-console
+      console.debug('EmailJS env present:', {
+        serviceId: Boolean(serviceId),
+        templateId: Boolean(templateId),
+        publicKey: Boolean(publicKey),
+      });
+    }
+
+    return { serviceId, templateId, publicKey };
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -35,12 +57,57 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! I will get back to you soon.');
-    setFormData({ name: '', email: '', message: '' });
+    const { serviceId, templateId, publicKey } = getEnvVars();
+
+    if (!serviceId || !templateId || !publicKey) {
+      const missing = [
+        !serviceId && 'REACT_APP_EMAILJS_SERVICE_ID',
+        !templateId && 'REACT_APP_EMAILJS_TEMPLATE_ID',
+        !publicKey && 'REACT_APP_EMAILJS_PUBLIC_KEY',
+      ]
+        .filter(Boolean)
+        .join(', ');
+
+      setStatus({
+        type: 'error',
+        message: missing
+          ? `Email service is not configured (${missing}). Check your .env and restart.`
+          : 'Email service is not configured yet. Please try again later.',
+      });
+      return;
+    }
+
+    setIsSending(true);
+    setStatus({ type: 'idle', message: '' });
+
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        },
+        publicKey
+      );
+
+      setStatus({
+        type: 'success',
+        message: 'Thanks for reaching out! Your message has been sent.',
+      });
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      setStatus({
+        type: 'error',
+        message: 'Something went wrong. Please try again in a moment.',
+      });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const socialLinks = [
@@ -212,7 +279,7 @@ const Contact = () => {
 
                 <motion.button
                   type="submit"
-                  className="w-full px-8 py-4 bg-white text-black font-light rounded-xl relative overflow-hidden group shadow-xl shadow-white/25 text-base tracking-wide"
+                  className="w-full px-8 py-4 bg-white text-black font-light rounded-xl relative overflow-hidden group shadow-xl shadow-white/25 text-base tracking-wide disabled:opacity-60 disabled:cursor-not-allowed"
                   whileHover={{ 
                     scale: 1.05,
                     boxShadow: '0 30px 60px rgba(255, 255, 255, 0.4), inset 0 0 30px rgba(255, 255, 255, 0.1)',
@@ -220,6 +287,7 @@ const Contact = () => {
                   }}
                   whileTap={{ scale: 0.97 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 18 }}
+                  disabled={isSending}
                 >
                   <motion.span
                     className="relative z-20 flex items-center justify-center gap-3"
@@ -227,7 +295,7 @@ const Contact = () => {
                     whileHover={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    Send Message
+                    {isSending ? 'Sending...' : 'Send Message'}
                     <span className="text-2xl">→</span>
                   </motion.span>
                   <motion.div
@@ -253,6 +321,16 @@ const Contact = () => {
                     transition={{ duration: 0.8 }}
                   />
                 </motion.button>
+
+                {status.type !== 'idle' && (
+                  <p
+                    className={`text-sm ${
+                      status.type === 'success' ? 'text-green-400' : 'text-red-400'
+                    }`}
+                  >
+                    {status.message}
+                  </p>
+                )}
               </form>
             </motion.div>
 
