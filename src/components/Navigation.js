@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-const Navigation = () => {
+const Navigation = ({ isAllProjectsPage = false, onNavigateHome }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -23,6 +23,15 @@ const Navigation = () => {
 
   const handleNavClick = (e, href) => {
     e.preventDefault();
+
+    if (isAllProjectsPage) {
+      if (onNavigateHome) {
+        onNavigateHome(href);
+      }
+      setIsMobileMenuOpen(false);
+      return;
+    }
+
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });

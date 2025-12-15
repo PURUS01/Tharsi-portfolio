@@ -2,8 +2,14 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import AnimatedBackground from '../components/AnimatedBackground';
+import CharacterAnimationImg from '../assets/projects/figma/Character Animation/charactor animation.jpg';
+import EcoEcommerceImg from '../assets/projects/figma/Eco E-Commerce/eco e commerce.jpg';
+import TravelBookingImg from '../assets/projects/figma/Travel Booking/travel booking.jpg';
+import CatImg from '../assets/projects/wordpress/CAT/cat.png';
+import SuntravelImg from '../assets/projects/wordpress/Suntravel/suntravek.png';
+import SkyAcademyImg from '../assets/projects/wordpress/Sky Academy/sky academy.png';
 
-const Projects = () => {
+const Projects = ({ onViewAll }) => {
   const ref = useRef(null);
   const [inViewRef, inView] = useInView({
     threshold: 0.05,
@@ -25,51 +31,63 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: 'E-Commerce Platform',
-      category: 'Web Design',
+      title: 'Travel Booking',
+      category: 'Figma',
+      image: TravelBookingImg,
       description:
-        'A modern e-commerce platform with intuitive user experience and seamless checkout process.',
-      tags: ['UI/UX', 'Figma', 'Prototyping'],
+        'Conversion-focused travel booking flow with hero lead, card grid, and streamlined checkout CTA.',
+      tags: ['UI/UX', 'Travel', 'Responsive'],
+      url: 'https://www.behance.net/gallery/240380633/Travek-Booking',
     },
     {
       id: 2,
-      title: 'Mobile Banking App',
-      category: 'Mobile Design',
+      title: 'Character Animation',
+      category: 'Figma',
+      image: CharacterAnimationImg,
       description:
-        'Secure and user-friendly mobile banking application with advanced security features.',
-      tags: ['Mobile', 'iOS', 'Android'],
+        'Playful animated storytelling with bold color, layered gradients, and motion emphasis.',
+      tags: ['Illustration', 'Landing', 'Motion'],
+      url: 'https://www.behance.net/gallery/239176941/Character-Animation-by-using-FIGMA',
     },
     {
       id: 3,
-      title: 'SaaS Dashboard',
-      category: 'Web Design',
+      title: 'Eco E-Commerce',
+      category: 'Figma',
+      image: EcoEcommerceImg,
       description:
-        'Comprehensive dashboard design for SaaS platform with data visualization and analytics.',
-      tags: ['Dashboard', 'Data Viz', 'Web'],
+        'Nature-inspired storefront with modular product tiles and calm, earthy palette.',
+      tags: ['E-Commerce', 'Sustainable', 'UI'],
+      url: 'https://www.behance.net/gallery/240376127/Eco-e-commerce',
     },
     {
       id: 4,
-      title: 'Fitness App',
-      category: 'Mobile Design',
+      title: 'CAT',
+      category: 'WordPress',
+      image: CatImg,
       description:
-        'Motivational fitness tracking app with beautiful UI and engaging user experience.',
-      tags: ['Mobile', 'Health', 'Fitness'],
+        'Corporate WordPress build with crisp hero, service highlights, and contact capture.',
+      tags: ['Corporate', 'WordPress', 'Responsive'],
+      url: 'https://www.behance.net/gallery/228230907/CAT',
     },
     {
       id: 5,
-      title: 'Restaurant Website',
-      category: 'Web Design',
+      title: 'Suntravel',
+      category: 'WordPress',
+      image: SuntravelImg,
       description:
-        'Elegant restaurant website with online ordering system and menu showcase.',
-      tags: ['Web', 'Food', 'E-commerce'],
+        'Travel agency site with destination highlights, offers, and inquiry-focused CTA.',
+      tags: ['Travel', 'Agency', 'WordPress'],
+      url: 'https://www.behance.net/gallery/238410803/suntravel',
     },
     {
       id: 6,
-      title: 'Travel Booking App',
-      category: 'Mobile Design',
+      title: 'Sky Academy',
+      category: 'WordPress',
+      image: SkyAcademyImg,
       description:
-        'Streamlined travel booking experience with easy navigation and booking flow.',
-      tags: ['Mobile', 'Travel', 'Booking'],
+        'Education-focused site blending course cards, instructor highlights, and enrollment funnels.',
+      tags: ['Education', 'WordPress', 'Courses'],
+      url: 'https://www.behance.net/gallery/228230443/SKY-academy',
     },
   ];
 
@@ -121,6 +139,12 @@ const Projects = () => {
     },
   };
 
+  const handleViewAll = () => {
+    if (onViewAll) {
+      onViewAll();
+    }
+  };
+
   return (
     <section
       id="projects"
@@ -158,7 +182,6 @@ const Projects = () => {
             animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
             transition={{ delay: 0.2, duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }}
           >
-            Featured
             <span className="block bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent font-extralight">
               Projects
             </span>
@@ -178,9 +201,12 @@ const Projects = () => {
             const isWide = index === 2;
             
             return (
-            <motion.div
+            <motion.a
               key={project.id}
               variants={itemVariants}
+              href={project.url}
+              target="_blank"
+              rel="noreferrer"
               className={`group relative bg-white/5 rounded-3xl overflow-hidden border border-white/10 backdrop-blur-xl cursor-pointer ${
                 isTall ? 'md:row-span-2' : ''
               } ${isWide ? 'md:col-span-2 lg:col-span-1' : ''}`}
@@ -197,34 +223,20 @@ const Projects = () => {
                 damping: 25,
               }}
             >
-              {/* Project Image Placeholder */}
-              <div className={`relative bg-gradient-to-br from-white/10 to-white/5 overflow-hidden ${
-                isTall ? 'h-96' : 'h-64'
-              }`}>
-                <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.05)_25%,rgba(255,255,255,0.05)_50%,transparent_50%,transparent_75%,rgba(255,255,255,0.05)_75%,rgba(255,255,255,0.05))] bg-[size:20px_20px]" />
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center"
-                  whileHover={{ 
-                    scale: 1.2,
-                    rotate: 5,
-                  }}
+              {/* Project Image */}
+              <div
+                className={`relative overflow-hidden ${
+                  isTall ? 'h-96' : 'h-64'
+                }`}
+              >
+                <motion.img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                  whileHover={{ scale: 1.08 }}
                   transition={{ duration: 0.5 }}
-                >
-                  <motion.span
-                    className="text-6xl opacity-20"
-                    animate={{ 
-                      scale: [1, 1.2, 1],
-                      rotate: [0, 10, 0],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    }}
-                  >
-                    🎨
-                  </motion.span>
-                </motion.div>
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
                 <motion.div
                   className="absolute top-4 right-4"
                   whileHover={{ scale: 1.1 }}
@@ -299,9 +311,94 @@ const Projects = () => {
                 }}
                 transition={{ duration: 0.5 }}
               />
-            </motion.div>
+            </motion.a>
             );
           })}
+        </motion.div>
+
+        {/* View All CTA */}
+        <motion.div
+          className="mt-14 flex justify-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.3, duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
+        >
+          <motion.button
+            onClick={handleViewAll}
+            className="px-10 py-4 rounded-full bg-white text-black font-light tracking-[0.15em] uppercase relative overflow-hidden group shadow-2xl shadow-white/15"
+            whileHover={{
+              scale: 1.08,
+              y: -6,
+              boxShadow:
+                '0 40px 140px rgba(255,255,255,0.4), 0 0 55px rgba(255,255,255,0.3)',
+            }}
+            whileTap={{ scale: 0.97 }}
+          >
+            {/* Animated gradient wash */}
+            <motion.div
+              className="absolute inset-0"
+              animate={{
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+              style={{
+                background:
+                  'linear-gradient(120deg, rgba(255,255,255,0.2), rgba(255,255,255,0.5), rgba(255,255,255,0.15))',
+                backgroundSize: '200% 200%',
+              }}
+            />
+
+            {/* Pulsing ring */}
+            <motion.div
+              className="absolute -inset-4 rounded-full border border-white/30"
+              animate={{ scale: [0.95, 1.05, 0.95], opacity: [0.6, 0.15, 0.6] }}
+              transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+            />
+
+            {/* Floating sparkles */}
+            <div className="absolute inset-0 pointer-events-none">
+              {[...Array(6)].map((_, i) => (
+                <motion.span
+                  key={i}
+                  className="absolute w-1.5 h-1.5 bg-white rounded-full"
+                  style={{
+                    top: `${15 + i * 12}%`,
+                    left: `${10 + (i * 13) % 80}%`,
+                    filter: 'blur(0.4px)',
+                  }}
+                  animate={{
+                    y: [0, -10, 0],
+                    opacity: [0.3, 1, 0.3],
+                    scale: [0.8, 1.2, 0.8],
+                  }}
+                  transition={{
+                    duration: 2 + i * 0.2,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                    delay: i * 0.15,
+                  }}
+                />
+              ))}
+            </div>
+
+            <span className="relative z-20 flex items-center gap-3">
+              View all projects
+              <motion.span
+                className="text-lg"
+                whileHover={{ x: 8 }}
+                transition={{ duration: 0.22 }}
+              >
+                →
+              </motion.span>
+            </span>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none z-10"
+              initial={{ x: '-200%' }}
+              whileHover={{ x: '200%' }}
+              transition={{ duration: 0.9 }}
+            />
+            <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-white/25 blur-2xl" />
+          </motion.button>
         </motion.div>
       </div>
     </section>
