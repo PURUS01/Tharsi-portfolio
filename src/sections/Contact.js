@@ -1,8 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import AnimatedBackground from '../components/AnimatedBackground';
 import emailjs from '@emailjs/browser';
+import { Toaster, toast } from 'react-hot-toast';
 
 const Contact = () => {
   const ref = useRef(null);
@@ -70,10 +71,15 @@ const Contact = () => {
         .filter(Boolean)
         .join(', ');
 
+      toast.error(
+        missing
+          ? `Email service is not configured (${missing}). Check your .env and restart.`
+          : 'Email service is not configured yet. Please try again later.'
+      );
       setStatus({
         type: 'error',
         message: missing
-          ? `Email service is not configured (${missing}). Check your .env and restart.`
+          ? `Missing env: ${missing}. Update .env and restart the app.`
           : 'Email service is not configured yet. Please try again later.',
       });
       return;
@@ -81,9 +87,9 @@ const Contact = () => {
 
     setIsSending(true);
     setStatus({ type: 'idle', message: '' });
-
     try {
-      await emailjs.send(
+      await toast.promise(
+        emailjs.send(
         serviceId,
         templateId,
         {
@@ -92,11 +98,17 @@ const Contact = () => {
           message: formData.message,
         },
         publicKey
+        ),
+        {
+          loading: 'Sending...',
+          success: 'Successfully sent!',
+          error: 'Something went wrong. Please try again in a moment.',
+        }
       );
 
       setStatus({
         type: 'success',
-        message: 'Thanks for reaching out! Your message has been sent.',
+        message: 'Successfully sent!',
       });
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
@@ -323,14 +335,27 @@ const Contact = () => {
                 </motion.button>
 
                 {status.type !== 'idle' && (
-                  <p
-                    className={`text-sm ${
-                      status.type === 'success' ? 'text-green-400' : 'text-red-400'
-                    }`}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35 }}
+                    className={`p-4 rounded-xl border ${
+                      status.type === 'success'
+                        ? 'bg-green-500/10 border-green-400/40 text-green-200'
+                        : 'bg-red-500/10 border-red-400/40 text-red-200'
+                    } shadow-lg shadow-black/20`}
                   >
-                    {status.message}
-                  </p>
+                    <div className="flex items-start gap-3">
+                      <span className="text-xl">
+                        {status.type === 'success' ? '✔' : '✖'}
+                      </span>
+                      <p className="text-sm leading-relaxed font-light tracking-wide">
+                        {status.message}
+                      </p>
+                    </div>
+                  </motion.div>
                 )}
+
               </form>
             </motion.div>
 
@@ -429,6 +454,7 @@ const Contact = () => {
           </div>
         </motion.div>
       </div>
+      <Toaster position="top-right" reverseOrder={false} />
     </section>
   );
 };
