@@ -143,7 +143,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }}
           >
-            Product Designer
+            UI/UX Designer
           </motion.span>
         </motion.h1>
 

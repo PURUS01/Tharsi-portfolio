@@ -72,9 +72,8 @@ const About = () => {
   };
 
   const stats = [
-    { number: '5+', label: 'Years Experience' },
-    { number: '50+', label: 'Projects Completed' },
-    { number: '30+', label: 'Happy Clients' },
+    { number: '1+', label: 'Year Experience' },
+    { number: '30+', label: 'Projects' },
     { number: '100%', label: 'Satisfaction Rate' },
   ];
 
@@ -283,10 +282,7 @@ const About = () => {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.6, duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }}
             >
-              Passionate About
-              <span className="block bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent font-extralight mt-2">
-                Design
-              </span>
+              About
             </motion.h2>
 
             {/* Introduction Text */}
@@ -297,34 +293,27 @@ const About = () => {
               transition={{ delay: 0.7, duration: 1 }}
             >
               <motion.p
-                className="text-lg sm:text-xl md:text-2xl text-white/70 leading-[1.6] font-extralight tracking-wide"
+                className="text-base sm:text-lg md:text-xl text-white/50 leading-[1.7] font-extralight tracking-wide"
               >
-                I'm <span className="text-white font-light text-2xl sm:text-3xl md:text-4xl">tharc</span>, a creative product designer with a passion for crafting
-                beautiful, user-centered digital experiences.
+                As a UI/UX Designer specializing in user interface design for web and mobile applications, with additional expertise in WordPress development and product poster design.
               </motion.p>
               
               <motion.p
                 className="text-base sm:text-lg md:text-xl text-white/50 leading-[1.7] font-extralight tracking-wide"
               >
-                With over 5 years of experience, I've worked with startups and established
-                companies to bring their visions to life. My approach combines research, creativity, and technical
-                expertise to design interfaces that are not only visually
-                stunning but also intuitive and accessible.
+                My primary focus is creating clean, intuitive, and responsive digital experiences that align with business objectives and user needs. I work closely with stakeholders to transform requirements into well-structured web and mobile interfaces, develop functional and scalable WordPress websites, and design visually compelling product posters that support branding and marketing goals.
               </motion.p>
               
               <motion.p
                 className="text-base sm:text-lg md:text-xl text-white/50 leading-[1.7] font-extralight tracking-wide"
               >
-                I believe great design solves problems and creates meaningful connections
-                between users and products. When I'm not designing, you'll find me exploring new design
-                trends, attending design conferences, or sharing knowledge with
-                the design community.
+                I believe effective design balances usability, clarity, and visual impact. By following modern design standards and best practices, I deliver consistent, accessible, and user-centered design solutions across digital platforms and marketing assets.
               </motion.p>
             </motion.div>
 
             {/* Stats - Horizontal Layout */}
             <motion.div
-              className="grid grid-cols-2 gap-4 mt-10"
+              className="grid grid-cols-3 gap-4 mt-10"
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.9, duration: 1 }}
