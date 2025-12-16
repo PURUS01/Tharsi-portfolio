@@ -233,6 +233,8 @@ const Projects = ({ onViewAll }) => {
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
                   whileHover={{ scale: 1.08 }}
                   transition={{ duration: 0.5 }}
                 />

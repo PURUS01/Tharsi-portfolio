@@ -83,3 +83,15 @@ code {
     text-wrap: pretty;
   }
 }
+
+/* Performance optimizations */
+@layer utilities {
+  .gpu-accelerated {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+  }
+  
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+}

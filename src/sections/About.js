@@ -18,7 +18,6 @@ const About = () => {
   
   const imageY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
   const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.05, 1]);
-  const imageRotate = useTransform(scrollYProgress, [0, 1], [0, 5]);
   
   const setRefs = (node) => {
     ref.current = node;
@@ -42,23 +41,6 @@ const About = () => {
       opacity: 0, 
       y: 80,
       scale: 0.9,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.8,
-        ease: [0.6, -0.05, 0.01, 0.99],
-      },
-    },
-  };
-
-  const titleVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 50,
-      scale: 0.95,
     },
     visible: {
       opacity: 1,
@@ -187,6 +169,8 @@ const About = () => {
                   src={profileImage}
                   alt="tharc - Product Designer"
                   className="w-full h-full object-cover"
+                  loading="eager"
+                  decoding="async"
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                 />
@@ -328,10 +312,15 @@ const About = () => {
                     borderColor: 'rgba(255, 255, 255, 0.3)',
                     boxShadow: '0 15px 35px rgba(255, 255, 255, 0.1)',
                   }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={inView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ delay: 1 + index * 0.1, duration: 0.6 }}
+                  transition={{ 
+                    type: 'spring', 
+                    stiffness: 300, 
+                    damping: 20,
+                    delay: 1 + index * 0.1, 
+                    duration: 0.6 
+                  }}
                 >
                   <motion.div
                     className="text-3xl sm:text-4xl font-light text-white mb-1 relative z-10"

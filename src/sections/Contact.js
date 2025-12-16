@@ -112,7 +112,9 @@ const Contact = () => {
       });
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
-      console.error('EmailJS error:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('EmailJS error:', error);
+      }
       setStatus({
         type: 'error',
         message: 'Something went wrong. Please try again in a moment.',
