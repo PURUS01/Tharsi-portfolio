@@ -173,17 +173,17 @@ const AllProjects = ({ onBack }) => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.12, delayChildren: 0.15 },
+      transition: { staggerChildren: 0.08, delayChildren: 0.1 },
     },
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 60, scale: 0.95 },
+    hidden: { opacity: 0, y: 20, scale: 0.98 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] },
+      transition: { duration: 0.5, ease: [0.6, -0.05, 0.01, 0.99] },
     },
   };
 
@@ -200,9 +200,10 @@ const AllProjects = ({ onBack }) => {
     <motion.div
       variants={containerVariants}
       initial="hidden"
+      animate="visible"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+      viewport={{ once: false, amount: 0.01, margin: '-200px 0px' }}
+      className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
     >
       {items.map((project) => (
         <motion.a
@@ -211,7 +212,10 @@ const AllProjects = ({ onBack }) => {
           href={project.url}
           target="_blank"
           rel="noreferrer"
-          className="group relative bg-white/5 rounded-3xl overflow-hidden border border-white/10 backdrop-blur-xl"
+          className="group relative bg-white/5 rounded-3xl overflow-hidden border border-white/10 backdrop-blur-xl w-full"
+          initial={{
+            borderColor: 'rgba(255, 255, 255, 0.1)',
+          }}
           whileHover={{
             y: -18,
             scale: 1.02,
@@ -272,6 +276,9 @@ const AllProjects = ({ onBack }) => {
                 <motion.span
                   key={tag}
                   className="px-3 py-1.5 text-xs font-light bg-white/10 text-white/80 rounded-full border border-white/10 tracking-wide"
+                  initial={{
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                  }}
                   whileHover={{
                     scale: 1.12,
                     backgroundColor: 'rgba(255, 255, 255, 0.2)',

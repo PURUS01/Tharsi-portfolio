@@ -125,10 +125,9 @@ const Contact = () => {
   };
 
   const socialLinks = [
-    { name: 'LinkedIn', icon: '💼', url: '#' },
-    { name: 'Dribbble', icon: '🎨', url: '#' },
-    { name: 'Behance', icon: '✨', url: '#' },
-    { name: 'Instagram', icon: '📷', url: '#' },
+    { name: 'LinkedIn', icon: '💼', url: 'https://www.linkedin.com/in/tharshika-loganathan-735a992a4' },
+    { name: 'Behance', icon: '✨', url: 'https://www.behance.net/logantharshi' },
+    { name: 'Instagram', icon: '📷', url: 'https://www.instagram.com/snapshi_stories' },
   ];
 
   const containerVariants = {
@@ -182,6 +181,7 @@ const Contact = () => {
       id="contact"
       ref={setRefs}
       className="relative py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-black overflow-hidden"
+      style={{ position: 'relative' }}
     >
       {/* Background Pattern with Parallax */}
       <motion.div
@@ -373,10 +373,10 @@ const Contact = () => {
                     <div>
                       <p className="text-white/60 text-sm mb-1">Email</p>
                       <a
-                        href="mailto:hello@example.com"
+                        href="mailto:logantharshi0407@gmail.com"
                         className="text-white hover:text-white/80 transition-colors"
                       >
-                        hello@example.com
+                        logantharshi0407@gmail.com
                       </a>
                     </div>
                   </div>
@@ -386,10 +386,10 @@ const Contact = () => {
                     <div>
                       <p className="text-white/60 text-sm mb-1">Phone</p>
                       <a
-                        href="tel:+1234567890"
+                        href="tel:+94764284850"
                         className="text-white hover:text-white/80 transition-colors"
                       >
-                        +1 (234) 567-890
+                        +94 764284850
                       </a>
                     </div>
                   </div>
@@ -398,7 +398,7 @@ const Contact = () => {
                     <span className="text-2xl">📍</span>
                     <div>
                       <p className="text-white/60 text-sm mb-1">Location</p>
-                      <p className="text-white">New York, USA</p>
+                      <p className="text-white">Kalleriyanseema Karaveddy west,<br />Karaveddy, Jaffna,<br />Srilanka</p>
                     </div>
                   </div>
                 </div>
@@ -415,6 +415,10 @@ const Contact = () => {
                       key={index}
                       href={social.url}
                       className="flex items-center space-x-3 p-5 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md relative overflow-hidden group"
+                      initial={{
+                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                        boxShadow: '0 0 0 rgba(255, 255, 255, 0)',
+                      }}
                       whileHover={{ 
                         scale: 1.12,
                         y: -10,

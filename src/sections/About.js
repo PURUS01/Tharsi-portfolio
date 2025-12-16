@@ -64,6 +64,7 @@ const About = () => {
       id="about"
       ref={setRefs}
       className="relative py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-black overflow-hidden min-h-screen flex items-center"
+      style={{ position: 'relative' }}
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
@@ -158,6 +159,10 @@ const About = () => {
               <motion.div
                 style={{ scale: imageScale }}
                 className="relative w-full max-w-md mx-auto aspect-square rounded-3xl overflow-hidden border-2 border-white/30 shadow-2xl group cursor-pointer bg-white/5"
+                initial={{
+                  borderColor: 'rgba(255, 255, 255, 0.3)',
+                  boxShadow: '0 0 0 rgba(255, 255, 255, 0)',
+                }}
                 whileHover={{ 
                   scale: 1.05,
                   boxShadow: '0 0 80px rgba(255, 255, 255, 0.4), 0 0 120px rgba(255, 255, 255, 0.2)',
@@ -306,14 +311,22 @@ const About = () => {
                 <motion.div
                   key={index}
                   className="p-5 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all relative overflow-hidden group"
+                  initial={{ 
+                    opacity: 0, 
+                    scale: 0.9,
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                    boxShadow: '0 0 0 rgba(255, 255, 255, 0)',
+                  }}
+                  animate={inView ? { 
+                    opacity: 1, 
+                    scale: 1,
+                  } : {}}
                   whileHover={{ 
                     scale: 1.05, 
                     y: -5,
                     borderColor: 'rgba(255, 255, 255, 0.3)',
                     boxShadow: '0 15px 35px rgba(255, 255, 255, 0.1)',
                   }}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ 
                     type: 'spring', 
                     stiffness: 300, 

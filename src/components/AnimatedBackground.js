@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 
 const AnimatedBackground = ({ variant = 'default' }) => {
@@ -340,44 +340,59 @@ const AnimatedBackground = ({ variant = 'default' }) => {
       ))}
 
       {/* Elegant Wave Patterns - SVG */}
-      {Array.from({ length: 4 }).map((_, i) => (
-        <motion.svg
-          key={`wave-${i}`}
-          className="absolute inset-0 w-full h-full"
-          style={{ opacity: 0.06 }}
-          animate={{
-            x: [0, 50, 100, 50, 0],
-            y: [0, 30, 0, -30, 0],
-          }}
-          transition={{
-            duration: 20 + i * 5,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        >
-          <motion.path
-            d={`M 0 ${300 + i * 150} Q ${100 + i * 50} ${300 + i * 150 - (50 + i * 30)}, ${200 + i * 100} ${300 + i * 150} T ${400 + i * 200} ${300 + i * 150}`}
-            fill="none"
-            stroke="white"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            animate={{
-              d: [
-                `M 0 ${300 + i * 150} Q ${100 + i * 50} ${300 + i * 150 - (50 + i * 30)}, ${200 + i * 100} ${300 + i * 150} T ${400 + i * 200} ${300 + i * 150}`,
-                `M 0 ${300 + i * 150} Q ${100 + i * 50} ${300 + i * 150 + (50 + i * 30)}, ${200 + i * 100} ${300 + i * 150} T ${400 + i * 200} ${300 + i * 150}`,
-                `M 0 ${300 + i * 150} Q ${100 + i * 50} ${300 + i * 150 - (30 + i * 20)}, ${200 + i * 100} ${300 + i * 150} T ${400 + i * 200} ${300 + i * 150}`,
-                `M 0 ${300 + i * 150} Q ${100 + i * 50} ${300 + i * 150 - (50 + i * 30)}, ${200 + i * 100} ${300 + i * 150} T ${400 + i * 200} ${300 + i * 150}`,
-              ],
-            }}
-            transition={{
-              duration: 8 + i * 2,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: i * 1.5,
-            }}
-          />
-        </motion.svg>
-      ))}
+      {useMemo(() => 
+        Array.from({ length: 4 }).map((_, i) => {
+          const baseY = 300 + i * 150;
+          const controlX = 100 + i * 50;
+          const endX = 200 + i * 100;
+          const finalX = 400 + i * 200;
+          const offset1 = 50 + i * 30;
+          const offset2 = 30 + i * 20;
+          
+          const initialPath = `M 0 ${baseY} Q ${controlX} ${baseY - offset1} ${endX} ${baseY} T ${finalX} ${baseY}`;
+          const pathVariants = [
+            initialPath,
+            `M 0 ${baseY} Q ${controlX} ${baseY + offset1} ${endX} ${baseY} T ${finalX} ${baseY}`,
+            `M 0 ${baseY} Q ${controlX} ${baseY - offset2} ${endX} ${baseY} T ${finalX} ${baseY}`,
+            initialPath,
+          ];
+          
+          return (
+            <motion.svg
+              key={`wave-${i}`}
+              className="absolute inset-0 w-full h-full"
+              style={{ opacity: 0.06 }}
+              animate={{
+                x: [0, 50, 100, 50, 0],
+                y: [0, 30, 0, -30, 0],
+              }}
+              transition={{
+                duration: 20 + i * 5,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            >
+              <motion.path
+                d={initialPath}
+                fill="none"
+                stroke="white"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                initial={{ d: initialPath }}
+                animate={{
+                  d: pathVariants,
+                }}
+                transition={{
+                  duration: 8 + i * 2,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                  delay: i * 1.5,
+                }}
+              />
+            </motion.svg>
+          );
+        }), []
+      )}
     </div>
   );
 };

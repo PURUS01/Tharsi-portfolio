@@ -150,6 +150,7 @@ const Projects = ({ onViewAll }) => {
       id="projects"
       ref={setRefs}
       className="relative py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-black overflow-hidden"
+      style={{ position: 'relative' }}
     >
       {/* Background Pattern with Parallax */}
       <motion.div
@@ -210,6 +211,10 @@ const Projects = ({ onViewAll }) => {
               className={`group relative bg-white/5 rounded-3xl overflow-hidden border border-white/10 backdrop-blur-xl cursor-pointer ${
                 isTall ? 'md:row-span-2' : ''
               } ${isWide ? 'md:col-span-2 lg:col-span-1' : ''}`}
+              initial={{
+                borderColor: 'rgba(255, 255, 255, 0.1)',
+                boxShadow: '0 0 0 rgba(255, 255, 255, 0)',
+              }}
               whileHover={{ 
                 y: -25,
                 scale: 1.05,

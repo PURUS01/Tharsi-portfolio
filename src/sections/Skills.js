@@ -112,6 +112,7 @@ const Skills = () => {
       id="skills"
       ref={setRefs}
       className="relative py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-black overflow-hidden"
+      style={{ position: 'relative' }}
     >
       {/* Background Pattern with Parallax */}
       <motion.div
@@ -225,6 +226,10 @@ const Skills = () => {
                   key={index}
                   variants={itemVariants}
                   className="p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md text-center relative overflow-hidden group cursor-pointer"
+                  initial={{
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                    boxShadow: '0 0 0 rgba(255, 255, 255, 0)',
+                  }}
                   whileHover={{ 
                     scale: 1.2,
                     y: -12,

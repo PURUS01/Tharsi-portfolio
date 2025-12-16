@@ -48,6 +48,7 @@ const Hero = () => {
       id="home"
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
+      style={{ position: 'relative' }}
     >
       {/* Animated Background Elements with Parallax */}
       <div className="absolute inset-0 overflow-hidden">
@@ -214,6 +215,10 @@ const Hero = () => {
           <motion.a
             href="#contact"
             className="px-10 py-5 border-2 border-white/30 text-white font-light rounded-full relative overflow-hidden group backdrop-blur-md bg-white/5 text-base tracking-wider"
+            initial={{
+              borderColor: 'rgba(255, 255, 255, 0.3)',
+              boxShadow: '0 0 0 rgba(255, 255, 255, 0)',
+            }}
             whileHover={{ 
               scale: 1.1,
               borderColor: 'rgba(255, 255, 255, 0.9)',
