@@ -7,7 +7,6 @@ import EcoEcommerceImg from '../assets/projects/figma/Eco E-Commerce/eco e comme
 import TravelBookingImg from '../assets/projects/figma/Travel Booking/travel booking.jpg';
 import CatImg from '../assets/projects/wordpress/CAT/cat.png';
 import SuntravelImg from '../assets/projects/wordpress/Suntravel/suntravek.png';
-import SkyAcademyImg from '../assets/projects/wordpress/Sky Academy/sky academy.png';
 
 const Projects = ({ onViewAll }) => {
   const ref = useRef(null);
@@ -78,16 +77,6 @@ const Projects = ({ onViewAll }) => {
         'Travel agency site with destination highlights, offers, and inquiry-focused CTA.',
       tags: ['Travel', 'Agency', 'WordPress'],
       url: 'https://www.behance.net/gallery/238410803/suntravel',
-    },
-    {
-      id: 6,
-      title: 'Sky Academy',
-      category: 'WordPress',
-      image: SkyAcademyImg,
-      description:
-        'Education-focused site blending course cards, instructor highlights, and enrollment funnels.',
-      tags: ['Education', 'WordPress', 'Courses'],
-      url: 'https://www.behance.net/gallery/228230443/SKY-academy',
     },
   ];
 
@@ -198,7 +187,9 @@ const Projects = ({ onViewAll }) => {
         >
           {projects.map((project, index) => {
             // Create asymmetric layout - some cards taller
-            const isTall = index === 1 || index === 4;
+            // Character Animation (index 1) is tall for visual balance
+            // Suntravel (index 4) has same height as CAT (index 3)
+            const isTall = index === 1;
             const isWide = index === 2;
             
             return (

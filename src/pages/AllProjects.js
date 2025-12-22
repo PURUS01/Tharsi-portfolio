@@ -45,7 +45,7 @@ const AllProjects = ({ onBack }) => {
       image: GamingCenterImg,
       description: 'E-sports hub featuring events, leaderboards, and membership tiers.',
       tags: ['Entertainment', 'Landing', 'Visual'],
-      url: 'https://www.behance.net', // Link not provided; please share the Behance URL to update.
+      url: 'https://www.behance.net/gallery/240380693/Saas',
     },
     {
       id: 'fig-4',
