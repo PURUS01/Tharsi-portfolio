@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import resumePdf from '../assets/resume/Tharsika-Resume.pdf';
 
 const Navigation = ({ isAllProjectsPage = false, onNavigateHome }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -88,6 +89,39 @@ const Navigation = ({ isAllProjectsPage = false, onNavigateHome }) => {
                 />
               </motion.a>
             ))}
+            {/* Resume Download Button */}
+            <motion.a
+              href={resumePdf}
+              download="Tharsika-Resume.pdf"
+              className="relative px-4 py-2 border border-white/30 rounded-full text-white/90 hover:text-white hover:border-white/60 transition-all font-extralight tracking-[0.15em] text-xs uppercase group overflow-hidden"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: navItems.length * 0.1 }}
+              whileHover={{ scale: 1.05, borderColor: 'rgba(255, 255, 255, 0.8)' }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                <svg
+                  className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                  />
+                </svg>
+                Download CV
+              </span>
+              <motion.div
+                className="absolute inset-0 bg-white/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                initial={false}
+              />
+            </motion.a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -146,6 +180,29 @@ const Navigation = ({ isAllProjectsPage = false, onNavigateHome }) => {
               {item.name}
             </a>
           ))}
+          {/* Resume Download Link for Mobile */}
+          <a
+            href={resumePdf}
+            download="Tharsika-Resume.pdf"
+            className="flex items-center gap-2 text-white/90 hover:text-white transition-colors py-2 border-t border-white/10 pt-4 mt-2"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              />
+            </svg>
+            Download CV
+          </a>
         </div>
       </motion.div>
     </motion.nav>
