@@ -15,7 +15,7 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            © {currentYear} <span className="text-white/70 font-light">tharc</span>. All rights reserved.
+            © {currentYear} <span className="text-white/70 font-light">Tharsika Loganathan</span>. All rights reserved.
           </motion.p>
           <motion.div
             className="flex space-x-8"

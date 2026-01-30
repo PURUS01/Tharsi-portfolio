@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import resumePdf from '../assets/resume/Tharsika-Resume.pdf';
 
 const Navigation = ({ isAllProjectsPage = false, onNavigateHome }) => {
@@ -41,64 +40,43 @@ const Navigation = ({ isAllProjectsPage = false, onNavigateHome }) => {
   };
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-black/98 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/20'
+          ? 'bg-black/98 backdrop-blur-xl border-b border-white/10'
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <motion.a
+          <a
             href="#home"
             onClick={(e) => handleNavClick(e, '#home')}
-            className="text-xl sm:text-2xl font-extralight tracking-[0.1em] text-white hover:text-white/90 transition-all relative group"
-            whileHover={{ scale: 1.08, letterSpacing: '0.15em' }}
-            whileTap={{ scale: 0.95 }}
+            className="text-base sm:text-lg font-light tracking-wide text-white hover:text-white/90 transition-colors relative group"
           >
-            <span className="relative z-10">tharc</span>
-            <motion.span
-              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white/80 transition-all group-hover:w-full"
-              transition={{ duration: 0.4, ease: 'easeOut' }}
-            />
-          </motion.a>
+            <span className="relative z-10">Tharsika Loganathan</span>
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white/80 transition-all group-hover:w-full" />
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item, index) => (
-              <motion.a
+            {navItems.map((item) => (
+              <a
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="text-white/70 hover:text-white transition-all relative group font-extralight tracking-[0.15em] text-xs uppercase"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ letterSpacing: '0.2em' }}
+                className="text-white/70 hover:text-white transition-colors relative group font-light tracking-wide text-xs uppercase"
               >
                 {item.name}
-                <motion.span
-                  className="absolute -bottom-1.5 left-0 w-0 h-0.5 bg-white/90 transition-all"
-                  whileHover={{ width: '100%' }}
-                  transition={{ duration: 0.4, ease: 'easeOut' }}
-                />
-              </motion.a>
+                <span className="absolute -bottom-1.5 left-0 w-0 h-0.5 bg-white/90 transition-all group-hover:w-full" />
+              </a>
             ))}
             {/* Resume Download Button */}
-            <motion.a
+            <a
               href={resumePdf}
               download="Tharsika-Resume.pdf"
-              className="relative px-4 py-2 border border-white/30 rounded-full text-white/90 hover:text-white hover:border-white/60 transition-all font-extralight tracking-[0.15em] text-xs uppercase group overflow-hidden"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: navItems.length * 0.1 }}
-              whileHover={{ scale: 1.05, borderColor: 'rgba(255, 255, 255, 0.8)' }}
-              whileTap={{ scale: 0.98 }}
+              className="relative px-4 py-2 border border-white/30 rounded-full text-white/90 hover:text-white hover:border-white/60 transition-all font-light tracking-wide text-xs uppercase group"
             >
               <span className="relative z-10 flex items-center gap-2">
                 <svg
@@ -117,11 +95,7 @@ const Navigation = ({ isAllProjectsPage = false, onNavigateHome }) => {
                 </svg>
                 Download CV
               </span>
-              <motion.div
-                className="absolute inset-0 bg-white/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                initial={false}
-              />
-            </motion.a>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -130,44 +104,32 @@ const Navigation = ({ isAllProjectsPage = false, onNavigateHome }) => {
             className="md:hidden text-white focus:outline-none"
             aria-label="Toggle menu"
           >
-            <motion.div
-              animate={isMobileMenuOpen ? 'open' : 'closed'}
-              className="w-6 h-6 flex flex-col justify-center space-y-1.5"
-            >
-              <motion.span
-                variants={{
-                  closed: { rotate: 0, y: 0 },
-                  open: { rotate: 45, y: 8 },
-                }}
-                className="w-full h-0.5 bg-white"
+            <div className="w-6 h-6 flex flex-col justify-center space-y-1.5">
+              <span
+                className={`w-full h-0.5 bg-white transition-all ${
+                  isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''
+                }`}
               />
-              <motion.span
-                variants={{
-                  closed: { opacity: 1 },
-                  open: { opacity: 0 },
-                }}
-                className="w-full h-0.5 bg-white"
+              <span
+                className={`w-full h-0.5 bg-white transition-all ${
+                  isMobileMenuOpen ? 'opacity-0' : ''
+                }`}
               />
-              <motion.span
-                variants={{
-                  closed: { rotate: 0, y: 0 },
-                  open: { rotate: -45, y: -8 },
-                }}
-                className="w-full h-0.5 bg-white"
+              <span
+                className={`w-full h-0.5 bg-white transition-all ${
+                  isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
+                }`}
               />
-            </motion.div>
+            </div>
           </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      <motion.div
-        initial={false}
-        animate={{
-          height: isMobileMenuOpen ? 'auto' : 0,
-          opacity: isMobileMenuOpen ? 1 : 0,
-        }}
-        className="md:hidden overflow-hidden bg-black/95 backdrop-blur-md border-t border-white/10"
+      <div
+        className={`md:hidden overflow-hidden bg-black/95 backdrop-blur-md border-t border-white/10 transition-all duration-300 ${
+          isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        }`}
       >
         <div className="px-4 py-4 space-y-4">
           {navItems.map((item) => (
@@ -204,8 +166,8 @@ const Navigation = ({ isAllProjectsPage = false, onNavigateHome }) => {
             Download CV
           </a>
         </div>
-      </motion.div>
-    </motion.nav>
+      </div>
+    </nav>
   );
 };
 

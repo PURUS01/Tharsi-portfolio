@@ -1,15 +1,21 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import AnimatedBackground from '../components/AnimatedBackground';
-import CharacterAnimationImg from '../assets/projects/figma/Character Animation/charactor animation.jpg';
-import EcoEcommerceImg from '../assets/projects/figma/Eco E-Commerce/eco e commerce.jpg';
-import GamingCenterImg from '../assets/projects/figma/Gaming Center/games centre.jpg';
-import JunctionCoffeeImg from '../assets/projects/figma/Junction Coffee/junction coffee.jpg';
+// Figma Projects - WEB DESIGN
+import CameraWebUIImg from '../assets/projects/figma/Camera Web UI/cameraweb.avif';
+import ClothingBrandImg from '../assets/projects/figma/Clothing Brand/clothingweb.jpg';
+import LuxyArchitectureImg from '../assets/projects/figma/Luxy Architecture/luxuryarcweb.webp';
 import MarvelImg from '../assets/projects/figma/Marvel/marvel.jpg';
-import ParcelServiceImg from '../assets/projects/figma/Parcel Service/parcel service.jpg';
-import SaasImg from '../assets/projects/figma/Saas/saas.jpg';
 import CarWashImg from '../assets/projects/figma/The Best Care Car Wash/car wash website.jpg';
-import TravelBookingImg from '../assets/projects/figma/Travel Booking/travel booking.jpg';
+import ParcelServiceImg from '../assets/projects/figma/Parcel Service/parcel service.jpg';
+// Figma Projects - MOBILE
+import FarmMobileUIImg from '../assets/projects/figma/Farm Mobile UI/farmmobile.jpg';
+import CarMobileUIImg from '../assets/projects/figma/Car Mobile UI/carmobile.jpeg';
+// Figma Projects - ECOMMERCE
+import EcoEcommerceImg from '../assets/projects/figma/Eco E-Commerce/eco e commerce.jpg';
+// Figma Projects - ANIMATION
+import CharacterAnimationImg from '../assets/projects/figma/Character Animation/charactor animation.jpg';
+import CoffeeAnimationImg from '../assets/projects/figma/Coffee Animation/coffee.jpeg';
 import CatImg from '../assets/projects/wordpress/CAT/cat.png';
 import MrConcreteImg from '../assets/projects/wordpress/Mr.Concrete/mr.concreate.png';
 import MylImg from '../assets/projects/wordpress/MYL/MYL.png';
@@ -20,32 +26,33 @@ import SuntravelImg from '../assets/projects/wordpress/Suntravel/suntravek.png';
 
 const AllProjects = ({ onBack }) => {
   const figmaProjects = [
+    // WEB DESIGN Projects
     {
       id: 'fig-1',
-      title: 'Character Animation',
+      title: 'Camera Web UI',
       category: 'Figma',
-      image: CharacterAnimationImg,
-      description: 'Playful animation landing with layered gradients and bold typography.',
-      tags: ['Illustration', 'Motion', 'Landing'],
-      url: 'https://www.behance.net/gallery/239176941/Character-Animation-by-using-FIGMA',
+      image: CameraWebUIImg,
+      description: 'Modern camera web interface with intuitive controls and sleek design.',
+      tags: ['Web Design', 'UI/UX', 'Product'],
+      url: 'https://www.behance.net/gallery/243186659/Camera-Web-UI',
     },
     {
       id: 'fig-2',
-      title: 'Eco E-Commerce',
+      title: 'Clothing Brand',
       category: 'Figma',
-      image: EcoEcommerceImg,
-      description: 'Nature-inspired shopfront with modular product tiles and soft neutrals.',
-      tags: ['E-Commerce', 'UI/UX', 'Sustainable'],
-      url: 'https://www.behance.net/gallery/240376127/Eco-e-commerce',
+      image: ClothingBrandImg,
+      description: 'Fashion-forward clothing brand website with elegant product showcase.',
+      tags: ['Brand', 'E-Commerce', 'Fashion'],
+      url: 'https://www.behance.net/gallery/243052229/Clothing-Brand',
     },
     {
       id: 'fig-3',
-      title: 'Gaming Center',
+      title: 'Luxy Architecture',
       category: 'Figma',
-      image: GamingCenterImg,
-      description: 'E-sports hub featuring events, leaderboards, and membership tiers.',
-      tags: ['Entertainment', 'Landing', 'Visual'],
-      url: 'https://www.behance.net/gallery/240380693/Saas',
+      image: LuxyArchitectureImg,
+      description: 'Luxury architecture portfolio with stunning visual presentations.',
+      tags: ['Architecture', 'Portfolio', 'Luxury'],
+      url: 'https://www.behance.net/gallery/242984587/Luxy-Architecture-Web-UI',
     },
     {
       id: 'fig-4',
@@ -58,12 +65,12 @@ const AllProjects = ({ onBack }) => {
     },
     {
       id: 'fig-5',
-      title: 'Junction Coffee',
+      title: 'Car Wash',
       category: 'Figma',
-      image: JunctionCoffeeImg,
-      description: 'Coffeehouse brand site with story-driven sections and rich imagery.',
-      tags: ['Brand', 'Storytelling', 'Responsive'],
-      url: 'https://www.behance.net/gallery/238783821/Java-junction',
+      image: CarWashImg,
+      description: 'Service site with package highlights, testimonials, and booking CTA.',
+      tags: ['Services', 'Local', 'Booking'],
+      url: 'https://www.behance.net/gallery/240376185/Car-Wash',
     },
     {
       id: 'fig-6',
@@ -74,32 +81,53 @@ const AllProjects = ({ onBack }) => {
       tags: ['Product', 'Logistics', 'Conversion'],
       url: 'https://www.behance.net/gallery/240376249/Parcel-Service',
     },
+    // MOBILE Projects
     {
       id: 'fig-7',
-      title: 'SaaS',
+      title: 'Farm Mobile UI',
       category: 'Figma',
-      image: SaasImg,
-      description: 'SaaS marketing site with dashboard storytelling and pricing focus.',
-      tags: ['SaaS', 'Components', 'Marketing'],
-      url: 'https://www.behance.net/gallery/240380693/Saas',
+      image: FarmMobileUIImg,
+      description: 'Agricultural mobile app interface with clean, nature-inspired design.',
+      tags: ['Mobile', 'Agriculture', 'App'],
+      url: 'https://www.behance.net/gallery/242750645/Farm-Mobile-UI',
     },
     {
       id: 'fig-8',
-      title: 'Car Wash',
+      title: 'Car Mobile UI',
       category: 'Figma',
-      image: CarWashImg,
-      description: 'Service site with package highlights, testimonials, and booking CTA.',
-      tags: ['Services', 'Local', 'Booking'],
-      url: 'https://www.behance.net/gallery/240376185/Car-Wash',
+      image: CarMobileUIImg,
+      description: 'Automotive mobile interface with modern design and user-friendly navigation.',
+      tags: ['Mobile', 'Automotive', 'App'],
+      url: 'https://www.behance.net/gallery/242705001/Mobile-UI',
     },
+    // ECOMMERCE Projects
     {
       id: 'fig-9',
-      title: 'Travel Booking',
+      title: 'Eco E-Commerce',
       category: 'Figma',
-      image: TravelBookingImg,
-      description: 'Travel marketplace with hero search, destination cards, and offers.',
-      tags: ['Travel', 'UX', 'Responsive'],
-      url: 'https://www.behance.net/gallery/240380633/Travek-Booking',
+      image: EcoEcommerceImg,
+      description: 'Nature-inspired shopfront with modular product tiles and soft neutrals.',
+      tags: ['E-Commerce', 'UI/UX', 'Sustainable'],
+      url: 'https://www.behance.net/gallery/240376127/Eco-e-commerce',
+    },
+    // ANIMATION Projects
+    {
+      id: 'fig-10',
+      title: 'Character Animation',
+      category: 'Figma',
+      image: CharacterAnimationImg,
+      description: 'Playful animation landing with layered gradients and bold typography.',
+      tags: ['Illustration', 'Motion', 'Landing'],
+      url: 'https://www.behance.net/gallery/239176941/Character-Animation-by-using-FIGMA',
+    },
+    {
+      id: 'fig-11',
+      title: 'Coffee Animation',
+      category: 'Figma',
+      image: CoffeeAnimationImg,
+      description: 'Coffeehouse brand site with story-driven sections and rich imagery.',
+      tags: ['Brand', 'Storytelling', 'Animation'],
+      url: 'https://www.behance.net/gallery/238783821/Java-junction',
     },
   ];
 
@@ -254,14 +282,14 @@ const AllProjects = ({ onBack }) => {
           <div className="p-6 sm:p-8 relative z-10">
             <div className="flex items-start justify-between mb-3">
               <motion.h3
-                className="text-xl sm:text-2xl font-extralight text-white tracking-wide flex-1"
+                className="text-lg sm:text-xl font-extralight text-white tracking-wide flex-1"
                 whileHover={{ x: 6, letterSpacing: '0.02em' }}
                 transition={{ duration: 0.25 }}
               >
                 {project.title}
               </motion.h3>
               <motion.div
-                className="ml-4 text-white/30 group-hover:text-white/90 transition-all text-2xl"
+                className="ml-4 text-white/30 group-hover:text-white/90 transition-all text-xl"
                 whileHover={{ rotate: 40, scale: 1.25 }}
                 transition={{ duration: 0.25 }}
               >
@@ -317,13 +345,13 @@ const AllProjects = ({ onBack }) => {
             <p className="text-xs font-extralight text-white/40 uppercase tracking-[0.3em] mb-4">
               Portfolio
             </p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extralight text-white leading-tight tracking-[-0.02em]">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extralight text-white leading-tight tracking-[-0.02em]">
               All Projects
               <span className="block bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent font-extralight">
                 Figma & WordPress
               </span>
             </h1>
-            <p className="text-white/55 mt-4 max-w-2xl font-extralight tracking-wide">
+            <p className="text-white/55 mt-4 max-w-2xl font-extralight tracking-wide text-sm sm:text-base">
               Every design and build collected in one place. Explore dedicated
               Figma prototypes and WordPress deliveries without losing the
               crafted aesthetic from the main experience.
@@ -355,7 +383,7 @@ const AllProjects = ({ onBack }) => {
                 <p className="text-xs font-extralight text-white/40 uppercase tracking-[0.3em] mb-2">
                   Design
                 </p>
-                <h2 className="text-3xl sm:text-4xl font-extralight text-white tracking-[-0.01em]">
+                <h2 className="text-2xl sm:text-3xl font-extralight text-white tracking-[-0.01em]">
                   Figma Projects
                 </h2>
               </div>
@@ -378,7 +406,7 @@ const AllProjects = ({ onBack }) => {
                 <p className="text-xs font-extralight text-white/40 uppercase tracking-[0.3em] mb-2">
                   Build
                 </p>
-                <h2 className="text-3xl sm:text-4xl font-extralight text-white tracking-[-0.01em]">
+                <h2 className="text-2xl sm:text-3xl font-extralight text-white tracking-[-0.01em]">
                   WordPress Projects
                 </h2>
               </div>
