@@ -1,401 +1,365 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import AnimatedBackground from '../components/AnimatedBackground';
-import CharacterAnimationImg from '../assets/projects/figma/Character Animation/charactor animation.jpg';
+
+// WEB DESIGN imports (from figma folder)
+import LuxyArchitectureImg from '../assets/projects/figma/Luxy Architecture/luxuryarcweb.webp';
+import ClothingBrandImg from '../assets/projects/figma/Clothing Brand/clothingweb.jpg';
+
+// MOBILE imports (from figma folder)
+import FarmMobileUIImg from '../assets/projects/figma/Farm Mobile UI/farmmobile.jpg';
+
+// DASHBOARD imports (from figma folder)
+import SaasImg from '../assets/projects/figma/Saas/saas.jpg';
+
+// ECOMMERCE imports (from figma folder)
 import EcoEcommerceImg from '../assets/projects/figma/Eco E-Commerce/eco e commerce.jpg';
-import TravelBookingImg from '../assets/projects/figma/Travel Booking/travel booking.jpg';
+
+// ANIMATION imports (from figma folder)
+import CoffeeAnimationImg from '../assets/projects/figma/Coffee Animation/coffee.jpeg';
+
+// WORDPRESS imports
 import CatImg from '../assets/projects/wordpress/CAT/cat.png';
-import SuntravelImg from '../assets/projects/wordpress/Suntravel/suntravek.png';
 
 const Projects = ({ onViewAll }) => {
-  const ref = useRef(null);
   const [inViewRef, inView] = useInView({
-    threshold: 0.05,
-    triggerOnce: false,
+    threshold: 0.1,
+    triggerOnce: true,
   });
-  
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
-  
-  const setRefs = (node) => {
-    ref.current = node;
-    inViewRef(node);
-  };
 
-  const projects = [
+  const portfolioCategories = [
     {
-      id: 1,
-      title: 'Travel Booking',
-      category: 'Figma',
-      image: TravelBookingImg,
-      description:
-        'Conversion-focused travel booking flow with hero lead, card grid, and streamlined checkout CTA.',
-      tags: ['UI/UX', 'Travel', 'Responsive'],
-      url: 'https://www.behance.net/gallery/240380633/Travek-Booking',
+      id: 'web-design',
+      title: 'WEB DESIGN',
+      image: LuxyArchitectureImg, // Using Luxy Architecture as representative image
+      projects: [
+        { title: 'Luxy Architecture', url: 'https://www.behance.net/gallery/242984587/Luxy-Architecture-Web-UI' },
+        { title: 'Clothing Brand', url: 'https://www.behance.net/gallery/243052229/Clothing-Brand' },
+      ],
+      url: 'https://www.behance.net/logantharshi',
     },
     {
-      id: 2,
-      title: 'Character Animation',
-      category: 'Figma',
-      image: CharacterAnimationImg,
-      description:
-        'Playful animated storytelling with bold color, layered gradients, and motion emphasis.',
-      tags: ['Illustration', 'Landing', 'Motion'],
-      url: 'https://www.behance.net/gallery/239176941/Character-Animation-by-using-FIGMA',
+      id: 'mobile',
+      title: 'MOBILE',
+      image: FarmMobileUIImg,
+      projects: [
+        { title: 'Farm Mobile UI', url: 'https://www.behance.net/gallery/242750645/Farm-Mobile-UI' },
+      ],
+      url: 'https://www.behance.net/gallery/242750645/Farm-Mobile-UI',
     },
     {
-      id: 3,
-      title: 'Eco E-Commerce',
-      category: 'Figma',
+      id: 'dashboard',
+      title: 'DASHBOARD',
+      image: SaasImg,
+      projects: [
+        { title: 'Saas', url: 'https://www.behance.net/gallery/240380693/Saas' },
+      ],
+      url: 'https://www.behance.net/gallery/240380693/Saas',
+    },
+    {
+      id: 'ecommerce',
+      title: 'ECOMMERCE',
       image: EcoEcommerceImg,
-      description:
-        'Nature-inspired storefront with modular product tiles and calm, earthy palette.',
-      tags: ['E-Commerce', 'Sustainable', 'UI'],
+      projects: [
+        { title: 'Eco E-Commerce', url: 'https://www.behance.net/gallery/240376127/Eco-e-commerce' },
+      ],
       url: 'https://www.behance.net/gallery/240376127/Eco-e-commerce',
     },
     {
-      id: 4,
-      title: 'CAT',
-      category: 'WordPress',
-      image: CatImg,
-      description:
-        'Corporate WordPress build with crisp hero, service highlights, and contact capture.',
-      tags: ['Corporate', 'WordPress', 'Responsive'],
-      url: 'https://www.behance.net/gallery/228230907/CAT',
+      id: 'animation',
+      title: 'ANIMATION',
+      image: CoffeeAnimationImg,
+      projects: [
+        { title: 'Coffee Animation', url: 'https://www.behance.net/gallery/238783821/Java-junction' },
+      ],
+      url: 'https://www.behance.net/gallery/238783821/Java-junction',
     },
     {
-      id: 5,
-      title: 'Suntravel',
-      category: 'WordPress',
-      image: SuntravelImg,
-      description:
-        'Travel agency site with destination highlights, offers, and inquiry-focused CTA.',
-      tags: ['Travel', 'Agency', 'WordPress'],
-      url: 'https://www.behance.net/gallery/238410803/suntravel',
+      id: 'wordpress',
+      title: 'WORDPRESS',
+      image: CatImg,
+      projects: [
+        { title: 'Center for Alternative Technologies', url: 'https://www.behance.net/gallery/228230907/CAT' },
+      ],
+      url: 'https://www.behance.net/gallery/228230907/CAT',
     },
   ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-        duration: 0.8,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 100,
-      scale: 0.85,
-      rotateX: 15,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      rotateX: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.6, -0.05, 0.01, 0.99],
-      },
-    },
-  };
-
-  const titleVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 50,
-      scale: 0.95,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.8,
-        ease: [0.6, -0.05, 0.01, 0.99],
-      },
-    },
-  };
-
-  const handleViewAll = () => {
-    if (onViewAll) {
-      onViewAll();
-    }
-  };
 
   return (
     <section
       id="projects"
-      ref={setRefs}
+      ref={inViewRef}
       className="relative py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-black overflow-hidden"
-      style={{ position: 'relative' }}
     >
-      {/* Background Pattern with Parallax */}
+      {/* Animated Gradient Background */}
       <motion.div
-        style={{ y: backgroundY }}
-        className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]"
+        className="absolute inset-0"
+        animate={{
+          background: [
+            'radial-gradient(ellipse 60% 50% at 90% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 50%)',
+            'radial-gradient(ellipse 70% 60% at 10% 80%, rgba(168, 85, 247, 0.12) 0%, transparent 50%)',
+            'radial-gradient(ellipse 60% 50% at 90% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 50%)',
+          ],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
       />
-      
-      {/* Animated Background Elements */}
-      <AnimatedBackground variant="projects" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Title */}
+      <div className="max-w-5xl mx-auto relative z-10 w-full">
+        {/* Section Header */}
         <motion.div
-          variants={titleVariants}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="text-center mb-16"
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
         >
           <motion.span
-            className="inline-block text-xs font-extralight text-white/40 uppercase tracking-[0.3em] mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1, duration: 0.8 }}
+            className="inline-block px-6 py-2 bg-indigo-500/10 border border-indigo-400/30 rounded-full text-xs font-light text-indigo-300 uppercase tracking-wider mb-6"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ delay: 0.2 }}
+            style={{
+              boxShadow: '0 0 20px rgba(99, 102, 241, 0.3)',
+            }}
           >
             Portfolio
           </motion.span>
           <motion.h2
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extralight text-white leading-[1.1] tracking-[-0.02em]"
-            initial={{ opacity: 0, y: 60, scale: 0.95 }}
-            animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-            transition={{ delay: 0.2, duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white leading-tight tracking-tight mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.3 }}
           >
-            <span className="block bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent font-extralight">
-              Projects
-            </span>
+            PORTFOLIO GRID
           </motion.h2>
+          <motion.p
+            className="text-sm sm:text-base text-white/60 max-w-3xl mx-auto font-light leading-relaxed"
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.4 }}
+          >
+            A curated selection of UI designs, dashboards, mobile interfaces, and visual creatives crafted with usability, clarity, and modern design principles.
+          </motion.p>
         </motion.div>
 
-        {/* Projects Grid - Asymmetric Masonry Layout */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 auto-rows-fr"
-        >
-          {projects.map((project, index) => {
-            // Create asymmetric layout - some cards taller
-            // Character Animation (index 1) is tall for visual balance
-            // Suntravel (index 4) has same height as CAT (index 3)
-            const isTall = index === 1;
-            const isWide = index === 2;
-            
-            return (
+        {/* Portfolio Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 items-end content-end">
+          {/* Row 1: WEB DESIGN and MOBILE */}
+          <motion.a
+            href={portfolioCategories[0].url}
+            target="_blank"
+            rel="noreferrer"
+            className="group relative overflow-hidden cursor-pointer flex flex-col h-full justify-end"
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.5 }}
+            whileHover={{ scale: 1.02, y: -4 }}
+          >
+            <div className="relative h-40 md:h-48 rounded-lg overflow-hidden border border-indigo-400/20 bg-white/5 backdrop-blur-sm">
+              <img
+                src={portfolioCategories[0].image}
+                alt={portfolioCategories[0].title}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  boxShadow: '0 0 40px rgba(99, 102, 241, 0.4), inset 0 0 40px rgba(99, 102, 241, 0.1)',
+                }}
+              />
+            </div>
+            <h3 className="mt-2 text-xs font-light text-white uppercase tracking-wider text-center min-h-[20px] flex items-end justify-center">
+              {portfolioCategories[0].title}
+            </h3>
+          </motion.a>
+
+          <motion.a
+            href={portfolioCategories[1].url}
+            target="_blank"
+            rel="noreferrer"
+            className="group relative overflow-hidden cursor-pointer flex flex-col h-full justify-end"
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.6 }}
+            whileHover={{ scale: 1.02, y: -4 }}
+          >
+            <div className="relative h-40 md:h-48 rounded-lg overflow-hidden border border-indigo-400/20 bg-white/5 backdrop-blur-sm">
+              <img
+                src={portfolioCategories[1].image}
+                alt={portfolioCategories[1].title}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  boxShadow: '0 0 40px rgba(99, 102, 241, 0.4), inset 0 0 40px rgba(99, 102, 241, 0.1)',
+                }}
+              />
+            </div>
+            <h3 className="mt-2 text-xs font-light text-white uppercase tracking-wider text-center min-h-[20px] flex items-end justify-center">
+              {portfolioCategories[1].title}
+            </h3>
+          </motion.a>
+
+          {/* Row 2: DASHBOARD (full width) */}
+          <motion.a
+            href={portfolioCategories[2].url}
+            target="_blank"
+            rel="noreferrer"
+            className="group relative overflow-hidden md:col-span-2 cursor-pointer flex flex-col h-full justify-end"
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.7 }}
+            whileHover={{ scale: 1.01, y: -4 }}
+          >
+            <div className="relative h-40 md:h-48 rounded-lg overflow-hidden border border-indigo-400/20 bg-white/5 backdrop-blur-sm">
+              <img
+                src={portfolioCategories[2].image}
+                alt={portfolioCategories[2].title}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  boxShadow: '0 0 40px rgba(99, 102, 241, 0.4), inset 0 0 40px rgba(99, 102, 241, 0.1)',
+                }}
+              />
+            </div>
+            <h3 className="mt-2 text-xs font-light text-white uppercase tracking-wider text-center min-h-[20px] flex items-end justify-center">
+              {portfolioCategories[2].title}
+            </h3>
+          </motion.a>
+
+          {/* Row 3: ECOMMERCE (large) and ANIMATION + WORDPRESS (stacked) */}
+          <motion.a
+            href={portfolioCategories[3].url}
+            target="_blank"
+            rel="noreferrer"
+            className="group relative overflow-hidden md:row-span-2 cursor-pointer flex flex-col"
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.8 }}
+            whileHover={{ scale: 1.02, y: -4 }}
+          >
+            <div className="relative flex-1 rounded-lg overflow-hidden border border-indigo-400/20 bg-white/5 backdrop-blur-sm min-h-[120px] max-h-[280px]">
+              <img
+                src={portfolioCategories[3].image}
+                alt={portfolioCategories[3].title}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  boxShadow: '0 0 40px rgba(99, 102, 241, 0.4), inset 0 0 40px rgba(99, 102, 241, 0.1)',
+                }}
+              />
+            </div>
+            <h3 className="mt-2 text-xs font-light text-white uppercase tracking-wider text-center min-h-[20px] flex items-end justify-center">
+              {portfolioCategories[3].title}
+            </h3>
+          </motion.a>
+
+          <div className="flex flex-col gap-2 h-full justify-end md:row-span-2">
             <motion.a
-              key={project.id}
-              variants={itemVariants}
-              href={project.url}
+              href={portfolioCategories[4].url}
               target="_blank"
               rel="noreferrer"
-              className={`group relative bg-white/5 rounded-3xl overflow-hidden border border-white/10 backdrop-blur-xl cursor-pointer ${
-                isTall ? 'md:row-span-2' : ''
-              } ${isWide ? 'md:col-span-2 lg:col-span-1' : ''}`}
-              initial={{
-                borderColor: 'rgba(255, 255, 255, 0.1)',
-                boxShadow: '0 0 0 rgba(255, 255, 255, 0)',
-              }}
-              whileHover={{ 
-                y: -25,
-                scale: 1.05,
-                borderColor: 'rgba(255, 255, 255, 0.5)',
-                boxShadow: '0 40px 100px rgba(255, 255, 255, 0.25), inset 0 0 30px rgba(255, 255, 255, 0.05)',
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-              }}
-              transition={{ 
-                type: 'spring',
-                stiffness: 300,
-                damping: 25,
-              }}
+              className="group relative overflow-hidden cursor-pointer flex flex-col"
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.9 }}
+              whileHover={{ scale: 1.02, y: -4 }}
             >
-              {/* Project Image */}
-              <div
-                className={`relative overflow-hidden ${
-                  isTall ? 'h-96' : 'h-64'
-                }`}
-              >
-                <motion.img
-                  src={project.image}
-                  alt={project.title}
+              <div className="relative h-36 rounded-lg overflow-hidden border border-indigo-400/20 bg-white/5 backdrop-blur-sm">
+                <img
+                  src={portfolioCategories[4].image}
+                  alt={portfolioCategories[4].title}
                   className="w-full h-full object-cover"
                   loading="lazy"
-                  decoding="async"
-                  whileHover={{ scale: 1.08 }}
-                  transition={{ duration: 0.5 }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-                <motion.div
-                  className="absolute top-4 right-4"
-                  whileHover={{ scale: 1.1 }}
-                >
-                  <span className="px-3 py-1 text-xs font-medium bg-black/70 text-white rounded-full backdrop-blur-sm border border-white/20">
-                    {project.category}
-                  </span>
-                </motion.div>
-                {/* Shine Effect */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-                  initial={{ x: '-100%' }}
-                  whileHover={{ x: '100%' }}
-                  transition={{ duration: 0.8 }}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    boxShadow: '0 0 40px rgba(99, 102, 241, 0.4), inset 0 0 40px rgba(99, 102, 241, 0.1)',
+                  }}
                 />
               </div>
-
-              {/* Project Content */}
-              <div className="p-6 sm:p-8 relative z-10">
-                <motion.div className="flex items-start justify-between mb-3">
-                  <motion.h3
-                    className="text-xl sm:text-2xl font-extralight text-white tracking-wide flex-1"
-                    whileHover={{ x: 8, letterSpacing: '0.02em' }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {project.title}
-                  </motion.h3>
-                  <motion.div
-                    className="ml-4 text-white/30 group-hover:text-white/90 transition-all text-2xl"
-                    whileHover={{ rotate: 45, scale: 1.3 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    →
-                  </motion.div>
-                </motion.div>
-                <p className="text-white/50 mb-6 text-sm sm:text-base leading-[1.7] font-extralight tracking-wide">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, tagIndex) => (
-                    <motion.span
-                      key={tagIndex}
-                      className="px-3 py-1.5 text-xs font-light bg-white/10 text-white/80 rounded-full border border-white/10 tracking-wide"
-                      whileHover={{
-                        scale: 1.15,
-                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                        borderColor: 'rgba(255, 255, 255, 0.3)',
-                        y: -2,
-                      }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {tag}
-                    </motion.span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Hover Overlay with Glow */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                initial={false}
-              />
-              <motion.div
-                className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                initial={false}
-              />
-              {/* Border Glow Effect */}
-              <motion.div
-                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100"
-                style={{
-                  boxShadow: 'inset 0 0 20px rgba(255, 255, 255, 0.1)',
-                }}
-                transition={{ duration: 0.5 }}
-              />
+              <h3 className="mt-2 text-xs font-light text-white uppercase tracking-wider text-center min-h-[20px] flex items-end justify-center">
+                {portfolioCategories[4].title}
+              </h3>
             </motion.a>
-            );
-          })}
-        </motion.div>
+
+            <motion.a
+              href={portfolioCategories[5].url}
+              target="_blank"
+              rel="noreferrer"
+              className="group relative overflow-hidden cursor-pointer flex flex-col"
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 1.0 }}
+              whileHover={{ scale: 1.02, y: -4 }}
+            >
+              <div className="relative h-36 rounded-lg overflow-hidden border border-indigo-400/20 bg-white/5 backdrop-blur-sm">
+                <img
+                  src={portfolioCategories[5].image}
+                  alt={portfolioCategories[5].title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    boxShadow: '0 0 40px rgba(99, 102, 241, 0.4), inset 0 0 40px rgba(99, 102, 241, 0.1)',
+                  }}
+                />
+              </div>
+              <h3 className="mt-2 text-xs font-light text-white uppercase tracking-wider text-center min-h-[20px] flex items-end justify-center">
+                {portfolioCategories[5].title}
+              </h3>
+            </motion.a>
+          </div>
+        </div>
 
         {/* View All CTA */}
         <motion.div
-          className="mt-14 flex justify-center"
+          className="mt-12 flex justify-center"
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.3, duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
+          transition={{ delay: 1.1 }}
         >
           <motion.button
-            onClick={handleViewAll}
-            className="px-10 py-4 rounded-full bg-white text-black font-light tracking-[0.15em] uppercase relative overflow-hidden group shadow-2xl shadow-white/15"
-            whileHover={{
-              scale: 1.08,
-              y: -6,
-              boxShadow:
-                '0 40px 140px rgba(255,255,255,0.4), 0 0 55px rgba(255,255,255,0.3)',
+            onClick={onViewAll}
+            className="group relative px-10 py-4 bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-light text-sm tracking-wide overflow-hidden"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            style={{
+              boxShadow: '0 0 30px rgba(99, 102, 241, 0.4), 0 0 60px rgba(168, 85, 247, 0.3)',
             }}
-            whileTap={{ scale: 0.97 }}
           >
-            {/* Animated gradient wash */}
-            <motion.div
-              className="absolute inset-0"
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-              }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              style={{
-                background:
-                  'linear-gradient(120deg, rgba(255,255,255,0.2), rgba(255,255,255,0.5), rgba(255,255,255,0.15))',
-                backgroundSize: '200% 200%',
-              }}
-            />
-
-            {/* Pulsing ring */}
-            <motion.div
-              className="absolute -inset-4 rounded-full border border-white/30"
-              animate={{ scale: [0.95, 1.05, 0.95], opacity: [0.6, 0.15, 0.6] }}
-              transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
-            />
-
-            {/* Floating sparkles */}
-            <div className="absolute inset-0 pointer-events-none">
-              {[...Array(6)].map((_, i) => (
-                <motion.span
-                  key={i}
-                  className="absolute w-1.5 h-1.5 bg-white rounded-full"
-                  style={{
-                    top: `${15 + i * 12}%`,
-                    left: `${10 + (i * 13) % 80}%`,
-                    filter: 'blur(0.4px)',
-                  }}
-                  animate={{
-                    y: [0, -10, 0],
-                    opacity: [0.3, 1, 0.3],
-                    scale: [0.8, 1.2, 0.8],
-                  }}
-                  transition={{
-                    duration: 2 + i * 0.2,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                    delay: i * 0.15,
-                  }}
-                />
-              ))}
-            </div>
-
-            <span className="relative z-20 flex items-center gap-3">
+            <motion.span
+              className="relative z-10 flex items-center gap-3"
+              whileHover={{ x: 5 }}
+            >
               View all projects
-              <motion.span
-                className="text-lg"
-                whileHover={{ x: 8 }}
-                transition={{ duration: 0.22 }}
-              >
-                →
-              </motion.span>
-            </span>
+              <span className="text-xl transition-transform group-hover:translate-x-2">→</span>
+            </motion.span>
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none z-10"
-              initial={{ x: '-200%' }}
-              whileHover={{ x: '200%' }}
-              transition={{ duration: 0.9 }}
+              className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity"
+              style={{ filter: 'blur(20px)' }}
             />
-            <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-white/25 blur-2xl" />
           </motion.button>
         </motion.div>
       </div>
@@ -404,4 +368,3 @@ const Projects = ({ onViewAll }) => {
 };
 
 export default Projects;
-

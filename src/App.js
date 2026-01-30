@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import SectionDivider from './components/SectionDivider';
-import FloatingElements from './components/FloatingElements';
 import ScrollProgress from './components/ScrollProgress';
 import Hero from './sections/Hero';
 import About from './sections/About';
@@ -59,7 +58,6 @@ function App() {
   return (
     <div className="App min-h-screen bg-black text-white relative">
       <ScrollProgress />
-      <FloatingElements />
       <Navigation
         isAllProjectsPage={isAllProjectsPage}
         onNavigateHome={navigateHome}
