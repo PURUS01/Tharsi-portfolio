@@ -91,8 +91,8 @@ const Contact = () => {
 
   const contactInfo = [
     { icon: '📧', label: 'Email', value: 'logantharshi0407@gmail.com', href: 'mailto:logantharshi0407@gmail.com' },
-    { icon: '📱', label: 'Phone', value: '+94 764284850', href: 'tel:+94764284850' },
-    { icon: '📍', label: 'Location', value: 'Kalleriyanseema Karaveddy west,\nKaraveddy, Jaffna,\nSrilanka', href: null },
+    { icon: '📱', label: 'Phone', value: '+971 54 254 5645', href: 'tel:+971542545645' },
+    { icon: '📍', label: 'Location', value: 'Dubai Land, Dubai, UAE', href: null },
   ];
 
   return (
